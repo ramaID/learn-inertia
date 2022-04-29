@@ -2,9 +2,20 @@
     <Head title="Users" />
 
     <div class="flex justify-between mb-6">
-        <h1 class="text-3xl">Users</h1>
+        <div class="flex items-center">
+            <h1 class="text-3xl">Users</h1>
 
-        <input v-model="search" type="text" placeholder="Search ..." class="border px-2 rounded-lg">
+            <Link href="/users/create" class="text-blue-500 text-sm ml-3">
+                New User
+            </Link>
+        </div>
+
+        <input
+            v-model="search"
+            type="text"
+            placeholder="Search ..."
+            class="border px-2 rounded-lg"
+        />
     </div>
 
     <div class="flex flex-col">
@@ -86,15 +97,19 @@ import { Inertia } from "@inertiajs/inertia";
 
 let props = defineProps({
     users: Object,
-    search: String
+    search: String,
 });
 
 let search = ref(props.search);
 
-watch(search, value => {
-    Inertia.get('/users', { search: value }, {
-        preserveState: true,
-        replace: true
-    })
+watch(search, (value) => {
+    Inertia.get(
+        "/users",
+        { search: value },
+        {
+            preserveState: true,
+            replace: true,
+        }
+    );
 });
 </script>
