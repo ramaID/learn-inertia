@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\LoginController;
 use App\Models\User;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Route;
@@ -16,47 +17,49 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', function () {
-    return Inertia::render('Home');
-});
+Route::get('login', [LoginController::class, 'create'])->name('login');
+Route::post('login', [LoginController::class, 'store']);
+Route::post('logout', [LoginController::class, 'destroy'])->middleware('auth');
 
-Route::get('/users', function () {
-    $search = Request::input('search');
-    /** @var \Illuminate\Pagination\LengthAwarePaginator */
-    $paginate = User::query()
-        ->when($search, fn ($query) => $query->where('name', 'like', "%{$search}%"))
-        ->paginate(10);
+Route::middleware('auth')->group(function () {
+    Route::get('/', function () {
+        return Inertia::render('Home');
+    });
 
-    return Inertia::render('Users/Index', [
-        'users' => $paginate->withQueryString()
-            ->through(fn($user) => [
-                'id' => $user->id,
-                'name' => $user->name,
-            ]),
-        'search' => $search,
-    ]);
-});
+    Route::get('/users', function () {
+        $search = Request::input('search');
+        /** @var \Illuminate\Pagination\LengthAwarePaginator */
+        $paginate = User::query()
+            ->when($search, fn ($query) => $query->where('name', 'like', "%{$search}%"))
+            ->paginate(10);
 
-Route::get('/users/create', function () {
-    return Inertia::render('Users/Create');
-});
+        return Inertia::render('Users/Index', [
+            'users' => $paginate->withQueryString()
+                ->through(fn ($user) => [
+                    'id' => $user->id,
+                    'name' => $user->name,
+                ]),
+            'search' => $search,
+        ]);
+    });
 
-Route::post('/users', function () {
-    $attributes = Request::validate([
-        'name' => 'required',
-        'email' => ['required', 'email'],
-        'password' => 'required',
-    ]);
+    Route::get('/users/create', function () {
+        return Inertia::render('Users/Create');
+    });
 
-    User::create($attributes);
+    Route::post('/users', function () {
+        $attributes = Request::validate([
+            'name' => 'required',
+            'email' => ['required', 'email'],
+            'password' => 'required',
+        ]);
 
-    return redirect('/users');
-});
+        User::create($attributes);
 
-Route::get('/settings', function () {
-    return Inertia::render('Settings');
-});
+        return redirect('/users');
+    });
 
-Route::post('/logout', function () {
-    dd('logging the user out');
+    Route::get('/settings', function () {
+        return Inertia::render('Settings');
+    });
 });
