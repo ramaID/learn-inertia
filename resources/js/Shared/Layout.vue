@@ -12,7 +12,15 @@
     </section>
 
     <section class="p-6">
-        <div class="max-w-2xl mx-auto ">
+        <div class="max-w-2xl mx-auto">
+            <iframe
+                class="mb-6"
+                width="100%"
+                seamless
+                title="laracasts simplecast"
+                src="https://player.simplecast.com/d2501a39-70a6-470f-9cf0-9ba8bddfdea2?dark=false"
+            ></iframe>
+
             <slot />
         </div>
     </section>
@@ -26,7 +34,7 @@ export default {
     computed: {
         username() {
             return this.$page.props.auth.user.name;
-        }
-    }
+        },
+    },
 };
 </script>
