@@ -22,8 +22,8 @@
             />
 
             <div
-                v-if="errors.name"
-                v-text="errors.name"
+                v-if="form.errors.name"
+                v-text="form.errors.name"
                 class="text-red-500 text-xs mt-1"
             ></div>
         </div>
@@ -46,8 +46,8 @@
             />
 
             <div
-                v-if="errors.email"
-                v-text="errors.email"
+                v-if="form.errors.email"
+                v-text="form.errors.email"
                 class="text-red-500 text-xs mt-1"
             ></div>
         </div>
@@ -70,8 +70,8 @@
             />
 
             <div
-                v-if="errors.password"
-                v-text="errors.password"
+                v-if="form.errors.password"
+                v-text="form.errors.password"
                 class="text-red-500 text-xs mt-1"
             ></div>
         </div>
@@ -86,6 +86,7 @@
                     px-4
                     hover:bg-blue-500
                 "
+                :disabled="form.processing"
             >
                 Submit
             </button>
@@ -94,20 +95,15 @@
 </template>
 
 <script setup>
-import { Inertia } from "@inertiajs/inertia";
-import { reactive } from "@vue/reactivity";
+import { useForm } from "@inertiajs/inertia-vue3";
 
-defineProps({
-    errors: Object,
-});
-
-let form = reactive({
+let form = useForm({
     name: "",
     email: "",
     password: "",
 });
 
 let submit = () => {
-    Inertia.post("/users", form);
+    form.post("/users");
 };
 </script>
