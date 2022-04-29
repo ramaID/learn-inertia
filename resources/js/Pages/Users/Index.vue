@@ -5,7 +5,7 @@
         <div class="flex items-center">
             <h1 class="text-3xl">Users</h1>
 
-            <Link href="/users/create" class="text-blue-500 text-sm ml-3">
+            <Link v-if="can.createUser" href="/users/create" class="text-blue-500 text-sm ml-3">
                 New User
             </Link>
         </div>
@@ -68,6 +68,7 @@
                                     "
                                 >
                                     <Link
+                                        v-if="user.can.edit"
                                         class="
                                             text-indigo-600
                                             hover:text-indigo-900
@@ -99,6 +100,7 @@ import debounce from "lodash/debounce";
 let props = defineProps({
     users: Object,
     search: String,
+    can: Object
 });
 
 let search = ref(props.search);
