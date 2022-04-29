@@ -81,7 +81,7 @@
 <script setup>
 import { ref } from "@vue/reactivity";
 import { watch } from "@vue/runtime-core";
-import Pagination from "../Shared/Pagination.vue";
+import Pagination from "../../Shared/Pagination.vue";
 import { Inertia } from "@inertiajs/inertia";
 
 let props = defineProps({
