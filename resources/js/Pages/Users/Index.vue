@@ -94,6 +94,7 @@ import { ref } from "@vue/reactivity";
 import { watch } from "@vue/runtime-core";
 import Pagination from "../../Shared/Pagination.vue";
 import { Inertia } from "@inertiajs/inertia";
+import debounce from "lodash/debounce";
 
 let props = defineProps({
     users: Object,
@@ -102,14 +103,15 @@ let props = defineProps({
 
 let search = ref(props.search);
 
-watch(search, (value) => {
-    Inertia.get(
-        "/users",
-        { search: value },
-        {
-            preserveState: true,
-            replace: true,
-        }
-    );
-});
+watch(
+    search,
+    debounce(function (value) {
+        console.log('triggered');
+        Inertia.get(
+            "/users",
+            { search: value },
+            { preserveState: true, replace: true }
+        );
+    }, 300)
+);
 </script>

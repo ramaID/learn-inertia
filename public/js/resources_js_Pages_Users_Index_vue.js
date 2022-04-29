@@ -11,10 +11,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
-/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
+/* harmony import */ var _vue_reactivity__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @vue/reactivity */ "./node_modules/@vue/reactivity/dist/reactivity.esm-bundler.js");
+/* harmony import */ var _vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @vue/runtime-core */ "./node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js");
 /* harmony import */ var _Shared_Pagination_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Shared/Pagination.vue */ "./resources/js/Shared/Pagination.vue");
 /* harmony import */ var _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @inertiajs/inertia */ "./node_modules/@inertiajs/inertia/dist/index.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash/debounce */ "./node_modules/lodash/debounce.js");
+/* harmony import */ var lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash_debounce__WEBPACK_IMPORTED_MODULE_2__);
+
 
 
 
@@ -28,22 +31,24 @@ __webpack_require__.r(__webpack_exports__);
     var expose = _ref.expose;
     expose();
     var props = __props;
-    var search = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_2__.ref)(props.search);
-    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__.watch)(search, function (value) {
+    var search = (0,_vue_reactivity__WEBPACK_IMPORTED_MODULE_3__.ref)(props.search);
+    (0,_vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.watch)(search, lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default()(function (value) {
+      console.log('triggered');
       _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia.get("/users", {
         search: value
       }, {
         preserveState: true,
         replace: true
       });
-    });
+    }, 300));
     var __returned__ = {
       props: props,
       search: search,
-      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_2__.ref,
-      watch: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_3__.watch,
+      ref: _vue_reactivity__WEBPACK_IMPORTED_MODULE_3__.ref,
+      watch: _vue_runtime_core__WEBPACK_IMPORTED_MODULE_4__.watch,
       Pagination: _Shared_Pagination_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
-      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia
+      Inertia: _inertiajs_inertia__WEBPACK_IMPORTED_MODULE_1__.Inertia,
+      debounce: (lodash_debounce__WEBPACK_IMPORTED_MODULE_2___default())
     };
     Object.defineProperty(__returned__, '__isScriptSetup', {
       enumerable: false,
