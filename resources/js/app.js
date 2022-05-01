@@ -5,7 +5,9 @@ import Layout from './Shared/Layout'
 
 createInertiaApp({
     resolve: async (name) => {
-        let page = (await import(`./Pages/${name}`)).default
+        let page = await import(`./Pages/${name}`)
+
+        page = page.default
 
         if (page.layout === undefined) {
             page.layout ??= Layout

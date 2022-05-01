@@ -286,7 +286,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_2__.createInertiaApp)({
   resolve: function () {
     var _resolve = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee(name) {
-      var page, _page$layout;
+      var page, _page, _page$layout;
 
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
@@ -296,15 +296,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
               return __webpack_require__("./resources/js/Pages lazy recursive ^\\.\\/.*$")("./".concat(name));
 
             case 2:
-              page = _context.sent["default"];
+              page = _context.sent;
+              page = page["default"];
 
               if (page.layout === undefined) {
-                (_page$layout = page.layout) !== null && _page$layout !== void 0 ? _page$layout : page.layout = _Shared_Layout__WEBPACK_IMPORTED_MODULE_4__["default"];
+                (_page$layout = (_page = page).layout) !== null && _page$layout !== void 0 ? _page$layout : _page.layout = _Shared_Layout__WEBPACK_IMPORTED_MODULE_4__["default"];
               }
 
               return _context.abrupt("return", page);
 
-            case 5:
+            case 6:
             case "end":
               return _context.stop();
           }

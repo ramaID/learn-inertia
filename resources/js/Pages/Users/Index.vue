@@ -71,10 +71,11 @@
 
 <script setup>
 import { ref } from '@vue/reactivity'
-import { watch } from '@vue/runtime-core'
-import Pagination from '@/Shared/Pagination.vue'
+import { defineAsyncComponent, watch } from '@vue/runtime-core'
 import { Inertia } from '@inertiajs/inertia'
 import debounce from 'lodash/debounce'
+
+let Pagination = defineAsyncComponent(() => import('@/Shared/Pagination.vue'))
 
 let props = defineProps({
     users: Object,
