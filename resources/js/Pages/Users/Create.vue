@@ -95,15 +95,15 @@
 </template>
 
 <script setup>
-import { useForm } from "@inertiajs/inertia-vue3";
+import { useForm } from '@inertiajs/inertia-vue3'
 
 let form = useForm({
-    name: "",
-    email: "",
-    password: "",
-});
+    name: '',
+    email: '',
+    password: '',
+})
 
 let submit = () => {
-    form.post("/users");
-};
+    form.post('/users')
+}
 </script>
