@@ -1,4 +1,17 @@
 {
+    "vueCompilerOptions": {
+        "experimentalDisableTemplateSupport": true,
+    },
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es6",
+        "baseUrl": ".",
+        "paths": {
+            "@/*": [
+                "./resources/js/*"
+            ]
+        }
+    },
     "include": [
         "./resources/js/**/*"
     ]
