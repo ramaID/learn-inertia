@@ -1,27 +1,21 @@
 <template>
-    <Head title="Home"/>
+    <Head title="Home" />
 
     <h1 class="text-3xl">Code</h1>
 
-    <pre>
-        <code ref="code">
-            class ClassName
-            {
-                public function __construct()
-                {
-                    // code
-                }
-            }
-        </code>
-    </pre>
+    <Highlight :code="snippet" />
 </template>
 
-<script>
-import { highlightElement } from "@/Services/SyntaxHighlighting"
+<script setup>
+import Highlight from '@/Components/Highlights.vue'
 
-export default {
-    mounted() {
-        highlightElement(this.$refs.code)
+let snippet = `
+class ClassName
+{
+    public function __construct()
+    {
+        // code
     }
 }
+`.trim()
 </script>
