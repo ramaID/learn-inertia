@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Request;
@@ -37,14 +38,7 @@ Route::middleware('auth')->group(function () {
             ->paginate(10);
 
         return Inertia::render('Users/Index', [
-            'users' => $paginate->withQueryString()
-                ->through(fn ($user) => [
-                    'id' => $user->id,
-                    'name' => $user->name,
-                    'can' => [
-                        'edit' => $auth->can('edit', $user),
-                    ],
-                ]),
+            'users' => UserResource::collection($paginate->withQueryString()),
             'search' => $search,
             'can' => [
                 'createUser' => $auth->can('create', User::class),
