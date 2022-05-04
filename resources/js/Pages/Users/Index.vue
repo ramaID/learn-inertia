@@ -64,18 +64,15 @@
             </div>
         </div>
     </div>
-
-    <!-- paginator -->
-    <Pagination :links="users.links" class="mt-6" />
 </template>
 
 <script setup>
 import { ref } from '@vue/reactivity'
-import { defineAsyncComponent, watch } from '@vue/runtime-core'
+import { watch } from '@vue/runtime-core'
 import { Inertia } from '@inertiajs/inertia'
 import debounce from 'lodash/debounce'
-
-let Pagination = defineAsyncComponent(() => import('@/Shared/Pagination.vue'))
+import { onMounted } from 'vue'
+import { useCurrentUser } from '@/Composables/useCurrentUser'
 
 let props = defineProps({
     users: Object,
@@ -96,4 +93,10 @@ watch(
         )
     }, 300)
 )
+
+let currentUser = useCurrentUser()
+
+onMounted(() => {
+    console.log(currentUser.follows({}))
+})
 </script>
